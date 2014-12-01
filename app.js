@@ -39,4 +39,3 @@ app.listen("3000", function(){
   console.log("really started");
 });
 
-console.log("Started?");
