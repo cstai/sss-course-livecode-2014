@@ -4,6 +4,19 @@
     <title>My page!</title>
   </head>
   <body>
-    Hello <%= name %>
+
+  <% if(!error && name){ %>
+    Hello, <%= name %>
+  <% } %>
+
+  <% if(error){ %>
+    <%= error %>
+  <% } %>
+
+    <form action="/" method="post">
+      <input type="text" name="name" value="<%= name %>">
+      <button>Go!</button>
+    </form>
+
   </body>
 </html>
