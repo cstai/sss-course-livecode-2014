@@ -1,5 +1,16 @@
 <% include ../partials/header %>
 
-Hello you there from <%= location %>
+<% if(location){ %>
+  Hello you there from <%= location %>
+<% } %>
+
+<% if(error){ %>
+  <%= error %>
+<% } %>
+
+<form action="<%= req.baseUrl + "/" %>" method="post">
+  <input type="text" name="location" value="<%= location || "" %>">
+  <button>Go!</button>
+</form>
 
 <% include ../partials/footer %>

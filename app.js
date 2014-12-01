@@ -1,15 +1,23 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 var app = express();
 
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(session({
+  secret: "superalkdfjalksdjflaksdjflaksdjflasd",
+  resave: false,
+  saveUninintialized: true
+}));
 
 var weatherRouter = require('./routes/weather');
+var userRouter = require('./routes/user');
 
 app.use("/weer", weatherRouter);
+app.use("/user", userRouter);
 
 app.get("/:name?", function(req, res){
   var data = {

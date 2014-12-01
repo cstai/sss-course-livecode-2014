@@ -2,17 +2,29 @@ var express = require('express');
 var router = express.Router();
 
 router.get("/", function(req, res){
-
-  var data = {};
-
-  if(req.query.location){
-    data.location = req.query.location;
-  } else {
-    data.location = "unknown location";
+  if(req.session.location){
+    return res.redirect(req.baseUrl + "/" + req.session.location);
   }
+
+  var data = {
+    req : req,
+    error: false,
+    location: null
+  };
 
   res.render("weather/index", data);
 })
+
+router.post("/", function(req, res){
+  req.session.location = req.body.location;
+  res.redirect(req.baseUrl + "/" + req.session.location);
+})
+
+router.get("/:location", function(req, res){
+  req.session.location = req.params.location;
+  res.send("Hey there in, " + req.params.location);
+})
+
 
 router.get("/where/:location/:name", function(req, res){
   var location = req.params.location;
