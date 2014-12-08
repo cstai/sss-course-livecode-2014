@@ -1,0 +1,8 @@
+<% include ../partials/header %>
+
+<form action="<%= req.baseUrl + "/upload" %>" method="post" enctype="multipart/form-data">
+  <input type="file" name="upload" value="">
+  <button>Upload</button>
+</form>
+
+<% include ../partials/footer %>
