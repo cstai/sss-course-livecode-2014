@@ -2,6 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var multer = require('multer');
+var mysql = require('mysql');
+var myConnection = require('express-myconnection');
 var app = express();
 
 app.set("view engine", "ejs");
@@ -14,6 +16,13 @@ app.use(session({
   resave: false,
   saveUninintialized: true
 }));
+
+app.use(myConnection(mysql, {
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'sss'
+}, 'single'))
 
 var weatherRouter = require('./routes/weather');
 var userRouter = require('./routes/user');
